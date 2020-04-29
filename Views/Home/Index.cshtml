@@ -1,0 +1,58 @@
+﻿@model ManagerModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="container">
+    @using (Html.BeginForm())
+
+
+    {
+        <div class="row py-3">
+            <div class="col-md-6">
+
+                @Html.LabelFor(x => x.RSSLink)
+                @Html.TextBoxFor(x => x.RSSLink, new { @class = "form-control" })
+
+            </div>
+            <div class="col-md-6">
+
+                @Html.LabelFor(x => x.Email)
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+            </div>
+
+        </div>
+        <div class="row py-3" style="min-height: 400px">
+            <div class="col-md-8">
+                @Html.TextArea("EmailContentTextArea", Model.EmailContent, new { @class = "form-control", @style = "height: 100%" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.ListBoxFor(x => x.SelectedSubscriptions, Model.Subscriptions as SelectList, new { @class = "form-control", @style = "height: 100%" })
+                <input type="submit" value="Delete" asp-controller="Home" asp-action="DeleteRSSLink" class="btn btn-primary" />
+            </div>
+        </div>
+
+        <div>
+            <input type="submit" value="Wyslij email" asp-controller="Home" asp-action="SendEmail" class="btn btn-primary" />
+        </div>
+
+        <div class="row py-3">
+            <div class="col-md-6">
+                <input type="submit" value="Pobierz RSS" asp-controller="Home" asp-action="DownloadRSS" class="btn btn-primary" />
+
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+        <div>
+
+            <div>
+                <input type="submit" value="Dodaj" asp-controller="Home" asp-action="SaveRSS" class="btn btn-success" />
+            </div>
+        </div>
+    }
+</div>
